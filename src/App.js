@@ -21,7 +21,7 @@ class App extends React.Component {
             <h1>Noteful</h1>
           </Link>
         </header>
-        <Sidebar folders={this.state.folders} />
+        <Sidebar notes={this.state.notes} folders={this.state.folders} />
         <main>
           <Switch>
             <Route exact path='/' render={() => <NoteList notes={this.state.notes} />} />
@@ -29,7 +29,6 @@ class App extends React.Component {
             <Route exact path='/note/:id' render={({ match }) => <Note note={this.state.notes.find(note => note.id === match.params.id)} />} />
             <Route render={() => <p>There are no notes to display.</p>} />
           </Switch>
-
         </main>
       </>
     );
