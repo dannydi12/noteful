@@ -1,6 +1,7 @@
 import React from 'react';
 import FolderList from '../FolderList/FolderList'
 import { Route, Switch } from 'react-router-dom';
+import './Sidebar.css';
 
 function Sidebar(props) {
   return (

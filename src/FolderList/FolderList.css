@@ -1,0 +1,11 @@
+.folder-list {
+  width: 100%;
+}
+
+.folder {
+  border: 2px solid black;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
