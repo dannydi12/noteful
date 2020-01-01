@@ -2,9 +2,11 @@ import React from 'react';
 
 function Note(props) {
   return(
-    <div>
-      <h3>Note Title</h3>
-    </div>
+    <li>
+      <h3>{props.note.name}</h3>
+      <p>{props.note.modified}</p>
+      <button>Delete</button>
+    </li>
   );
 }
 

@@ -1,13 +1,8 @@
 import React from 'react';
+import Note from '../Note/Note';
 
 function NoteList(props) {
-  const notes = props.notes.map(note => (
-    <li key={note.id}>
-      <h3>{note.name}</h3>
-      <p>{note.modified}</p>
-      <button>Delete</button>
-    </li>
-  ));
+  const notes = props.notes.map(note => <Note key={note.id} note={note} />);
   return (
     <>
       <ul>
