@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import { Route, Link, Switch } from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';
-// import FolderList from './FolderList/FolderList';
 import NoteList from './NoteList/NoteList';
 import Note from './Note/Note'
 import store from './store'

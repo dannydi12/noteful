@@ -2,7 +2,6 @@ import React from 'react';
 import FolderList from '../FolderList/FolderList'
 import { Route, Switch } from 'react-router-dom';
 
-
 function Sidebar(props) {
   return (
     <aside>
