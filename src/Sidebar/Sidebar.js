@@ -1,13 +1,15 @@
 import React from 'react';
 import FolderList from '../FolderList/FolderList'
-import { Route, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 
 function Sidebar(props) {
-  return(
+  return (
     <aside>
-      <Route path='/' render={() => <FolderList folders={props.folders} />} />
-      {/* Add route to display go back button only when seeing note */}
+      <Switch>
+        <Route path='/note/:id' render={({ history }) => <button onClick={history.goBack}>Go Back</button>} />
+        <Route render={() => <FolderList folders={props.folders} />} />
+      </Switch>
     </aside>
   );
 }
