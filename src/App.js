@@ -5,6 +5,11 @@ import Sidebar from './Sidebar/Sidebar';
 import NoteList from './NoteList/NoteList';
 import Note from './Note/Note';
 import NotefulContext from './NotefulContext';
+import AddFolder from './AddFolder/AddFolder';
+import MainError from './Error/MainError';
+import AddNote from './AddNote/AddNote';
+import moment from 'moment';
+
 
 class App extends React.Component {
   state = {
@@ -50,6 +55,49 @@ class App extends React.Component {
       .catch(err => console.log(`Oops: ${err}`));
   }
 
+  addFolder = (event, callback) => {
+    event.preventDefault();
+    const url = `http://localhost:9090/folders`
+
+
+    fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value }) })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.ok)
+        }
+        return res;
+      })
+      .then(res => {
+        this.getStore('folders')
+        this.getStore('notes')
+        callback();
+        return res.json();
+      })
+      .catch(err => console.log(`Oops: ${err}`));
+
+  }
+
+  addNote = (event, callback) => {
+    event.preventDefault();
+    const url = `http://localhost:9090/notes`
+
+
+    fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value, folderId: event.target.folderId.value, modified: moment().format(), content: event.target.content.value }) })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.ok)
+        }
+        return res;
+      })
+      .then(res => {
+        this.getStore('folders')
+        this.getStore('notes')
+        callback();
+        return res.json();
+      })
+      .catch(err => console.log(`Oops: ${err}`));
+
+  }
 
   componentDidMount() {
     this.getStore('folders');
@@ -67,16 +115,24 @@ class App extends React.Component {
         <NotefulContext.Provider value={{
           folders: this.state.folders,
           notes: this.state.notes,
-          delete: this.deleteNote
+          delete: this.deleteNote,
+          addFolder: this.addFolder,
+          addNote: this.addNote
         }}>
-          <Sidebar />
+          <MainError>
+            <Sidebar />
+          </MainError>
           <main>
-            <Switch>
-              <Route exact path='/' render={() => <NoteList notes={this.state.notes} />} />
-              <Route exact path='/folder/:id' render={({ match }) => <NoteList notes={this.state.notes.filter(note => note.folderId === match.params.id)} />} />
-              <Route exact path='/note/:id' render={({ match }) => <Note note={this.state.notes.find(note => note.id === match.params.id)} />} />
-              <Route render={() => <p>There are no notes to display.</p>} />
-            </Switch>
+            <MainError>
+              <Switch>
+                <Route exact path='/' render={(routeProps) => <NoteList {...routeProps} notes={this.state.notes} />} />
+                <Route exact path='/folder/:id' render={(routeProps) => <NoteList {...routeProps} notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.id)} />} />
+                <Route exact path='/note/:id' render={({ match }) => <Note note={this.state.notes.find(note => note.id === match.params.id)} />} />
+                <Route exact path='/add-folder' component={AddFolder} />
+                <Route exact path='/add-note' component={AddNote} />
+                <Route render={() => <p>There are no notes to display.</p>} />
+              </Switch>
+            </MainError>
           </main>
         </NotefulContext.Provider>
       </>

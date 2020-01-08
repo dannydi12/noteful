@@ -20,7 +20,7 @@ function Sidebar(props) {
                 }</h2> 
                 <button onClick={routerProps.history.goBack}>Go Back</button>
               </>)} />
-            <Route render={() => <FolderList folders={value.folders} />} />
+            <Route render={({history}) => <FolderList history={history} folders={value.folders} />} />
           </Switch>
         </aside>);
       }}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import './Note.css';
 import NotefulContext from '../NotefulContext';
+import PropTypes from 'prop-types';
 
 function Note(props) {
   return (
@@ -20,6 +21,10 @@ function Note(props) {
       }}
     </NotefulContext.Consumer>
   );
+}
+
+Note.propTypes = {
+  note: PropTypes.object.isRequired
 }
 
 export default Note;

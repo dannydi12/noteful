@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './FolderList.css'
+import './FolderList.css';
+import PropTypes from 'prop-types';
 
 function FolderList(props) {
   const folders = props.folders.map(folder => (
@@ -15,7 +16,7 @@ function FolderList(props) {
       <ul>
         {folders}
       </ul>
-      <button>Add Folder</button>
+      <button onClick={() => props.history.push('/add-folder')}>Add Folder</button>
     </div>
   );
 }
@@ -23,5 +24,9 @@ function FolderList(props) {
 FolderList.defaultProps = {
   folders: [{ id: '0', name: 'empty' }]
 }
+
+FolderList.propTypes = {
+  folders: PropTypes.array.isRequired 
+};
 
 export default FolderList;
