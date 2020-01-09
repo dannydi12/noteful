@@ -26,10 +26,8 @@ class AddFolder extends React.Component {
 
   validateName() {
     const name = this.state.name.value.trim();
-    
-    
+
     if (name.length === 0) {
-      console.log('uuuuu')
       return 'name is required'
     }
     else if (name.length < 3 || name.length > 30) {
@@ -38,10 +36,7 @@ class AddFolder extends React.Component {
     else if (name.match(/[0-9]/g)) {
       return 'name can\'t contain numbers'
     }
-
   }
-
-
 
   render() {
     const nameError = this.validateName();
@@ -52,7 +47,7 @@ class AddFolder extends React.Component {
             <form onSubmit={(e) => value.addFolder(e, this.changePage)}>
               <label htmlFor='name'>Name</label>
               <input name='name' type='text' onChange={(e) => this.updateName(e.target.value)} />
-              {this.state.name.touched && <ValidationError message={nameError}/>}
+              {this.state.name.touched && <ValidationError message={nameError} />}
               <button disabled={this.validateName()} type='submit'>Add Folder</button>
             </form>
           );

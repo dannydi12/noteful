@@ -7,6 +7,7 @@ export default class MainError extends React.Component {
       console.error(error);
       return {error};
   }
+  
   render() {
       if (this.state.error) {
           return (

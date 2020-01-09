@@ -59,44 +59,38 @@ class App extends React.Component {
     event.preventDefault();
     const url = `http://localhost:9090/folders`
 
-
     fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value }) })
       .then(res => {
         if (!res.ok) {
           throw Error(res.ok)
         }
-        return res;
-      })
-      .then(res => {
-        this.getStore('folders')
-        this.getStore('notes')
-        callback();
         return res.json();
       })
+      .then(res => {
+        this.updateState([...this.state.folders, res], 'folders')
+        callback();
+        return res;
+      })
       .catch(err => console.log(`Oops: ${err}`));
-
   }
 
   addNote = (event, callback) => {
     event.preventDefault();
     const url = `http://localhost:9090/notes`
 
-
     fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value, folderId: event.target.folderId.value, modified: moment().format(), content: event.target.content.value }) })
       .then(res => {
         if (!res.ok) {
           throw Error(res.ok)
         }
-        return res;
-      })
-      .then(res => {
-        this.getStore('folders')
-        this.getStore('notes')
-        callback();
         return res.json();
       })
+      .then(res => {
+        this.updateState([...this.state.notes, res], 'notes')
+        callback();
+        return res;
+      })
       .catch(err => console.log(`Oops: ${err}`));
-
   }
 
   componentDidMount() {

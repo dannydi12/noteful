@@ -33,7 +33,7 @@ class AddNote extends React.Component {
 
   validateName() {
     const name = this.state.name.value.trim();
-    
+
     if (name.length === 0) {
       return 'name is required'
     }
@@ -47,17 +47,14 @@ class AddNote extends React.Component {
 
   validateContent() {
     const content = this.state.content.value.trim();
-    
-    if (content.length === 0){
+
+    if (content.length === 0) {
       return 'please enter content for your note'
-    } else if (content.length > 5000){
+    } else if (content.length > 5000) {
       return 'please limit the number of characters to be less than 150'
     }
 
   }
-
-  
-  
 
   render() {
 
@@ -71,8 +68,8 @@ class AddNote extends React.Component {
             <form onSubmit={(e) => value.addNote(e, this.changePage)}>
               <label htmlFor='name'>Name</label>
               <input name='name' type='text' onChange={(e) => this.updateName(e.target.value)} />
-              {this.state.name.touched && <ValidationError message={nameError}/>}
-              
+              {this.state.name.touched && <ValidationError message={nameError} />}
+
               <label htmlFor='folderId'>Folder ID</label>
               <select name='folderId'>
                 {value.folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)}
@@ -80,7 +77,7 @@ class AddNote extends React.Component {
 
               <label htmlFor='content'>Content</label>
               <textarea name='content' type='text' />
-              {this.state.name.touched && <ValidationError message={noteError}/>}
+              {this.state.name.touched && <ValidationError message={noteError} />}
 
               <button type='submit'>Add Note</button>
             </form>
