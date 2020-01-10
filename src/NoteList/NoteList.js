@@ -24,7 +24,13 @@ NoteList.defaultProps = {
 }
 
 NoteList.propTypes = {
-  notes: PropTypes.array.isRequired 
+  notes: PropTypes.arrayOf(PropTypes.shape({ 
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    folderId: PropTypes.string.isRequired
+  }))
 };
 
 export default NoteList;

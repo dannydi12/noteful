@@ -24,7 +24,13 @@ function Note(props) {
 }
 
 Note.propTypes = {
-  note: PropTypes.object.isRequired
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    folderId: PropTypes.string.isRequired
+  })
 }
 
 export default Note;

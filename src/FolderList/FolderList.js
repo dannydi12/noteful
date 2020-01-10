@@ -26,7 +26,10 @@ FolderList.defaultProps = {
 }
 
 FolderList.propTypes = {
-  folders: PropTypes.array.isRequired 
+  folders: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired 
 };
 
 export default FolderList;

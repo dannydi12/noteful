@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default function ValidationError (props) {
   return(
@@ -9,6 +9,6 @@ export default function ValidationError (props) {
   );
 }
 
-// ValidationError.propTypes = {
-//   message: PropTypes.string.isRequired
-// }
+ValidationError.propTypes = {
+  message: PropTypes.string
+}
