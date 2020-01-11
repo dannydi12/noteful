@@ -1,7 +1,8 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import { withRouter } from 'react-router-dom';
-import ValidationError from '../ValidationError/ValidationError'
+import ValidationError from '../ValidationError/ValidationError';
+import './AddFolder.css';
 
 class AddFolder extends React.Component {
   state = {
@@ -44,11 +45,11 @@ class AddFolder extends React.Component {
       <NotefulContext.Consumer>
         {value => {
           return (
-            <form onSubmit={(e) => value.addFolder(e, this.changePage)}>
+            <form className='add-folder-form' onSubmit={(e) => value.addFolder(e, this.changePage)}>
               <label htmlFor='name'>Name</label>
               <input name='name' type='text' onChange={(e) => this.updateName(e.target.value)} />
               {this.state.name.touched && <ValidationError message={nameError} />}
-              <button disabled={this.validateName()} type='submit'>Add Folder</button>
+              <button aria-label='Add a folder' disabled={this.validateName()} type='submit'>Add Folder</button>
             </form>
           );
         }

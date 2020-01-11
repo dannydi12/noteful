@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter} from 'react-router-dom';
 import './Note.css';
 import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
@@ -14,7 +14,9 @@ function Note(props) {
               <h3>{props.note.name}</h3>
             </Link>
             <p>{props.note.modified}</p>
-            <button onClick={() => value.delete(props.note.id)}>Delete</button>
+            <button onClick={() => {
+              value.delete(props.note.id);
+              props.history.push('/');}}>Delete</button>
             <Route path='/note/:id' render={() => <p>{props.note.content}</p>} />
           </>
         );
@@ -33,4 +35,4 @@ Note.propTypes = {
   })
 }
 
-export default Note;
+export default withRouter(Note);

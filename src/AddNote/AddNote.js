@@ -1,7 +1,8 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import { withRouter } from 'react-router-dom';
-import ValidationError from '../ValidationError/ValidationError'
+import ValidationError from '../ValidationError/ValidationError';
+import './AddNote.css';
 
 class AddNote extends React.Component {
   state = {
@@ -26,6 +27,15 @@ class AddNote extends React.Component {
     this.setState({
       name: {
         value: noteName,
+        touched: true
+      }
+    });
+  }
+
+  updateContent(content) {
+    this.setState({
+      content: {
+        value: content,
         touched: true
       }
     });
@@ -65,21 +75,21 @@ class AddNote extends React.Component {
       <NotefulContext.Consumer>
         {value => {
           return (
-            <form onSubmit={(e) => value.addNote(e, this.changePage)}>
-              <label htmlFor='name'>Name</label>
-              <input name='name' type='text' onChange={(e) => this.updateName(e.target.value)} />
+            <form className='add-note-form' onSubmit={(e) => value.addNote(e, this.changePage)}>
+              <label id='name' htmlFor='name'>Name</label>
+              <input aria-labelledby='name' name='name' type='text' onChange={(e) => this.updateName(e.target.value)} />
               {this.state.name.touched && <ValidationError message={nameError} />}
 
-              <label htmlFor='folderId'>Folder ID</label>
-              <select name='folderId'>
+              <label id='folderId' htmlFor='folderId'>Folder ID</label>
+              <select aria-labelledby='folderId' name='folderId'>
                 {value.folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)}
               </select>
 
-              <label htmlFor='content'>Content</label>
-              <textarea name='content' type='text' />
-              {this.state.name.touched && <ValidationError message={noteError} />}
+              <label id='content' htmlFor='content'>Content</label>
+              <textarea aria-labelledby='content' name='content' type='text' onChange={(e) => this.updateContent(e.target.value)} />
+              {this.state.content.touched && <ValidationError message={noteError} />}
 
-              <button type='submit'>Add Note</button>
+              <button aria-label='Add a note' type='submit'>Add Note</button>
             </form>
           );
         }

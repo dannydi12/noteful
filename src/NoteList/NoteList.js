@@ -10,7 +10,6 @@ function NoteList(props) {
         {notes}
       </ul>
       <button onClick={() => props.history.push('/add-note')}>Add Note</button>
-      
     </>
   );
 }
