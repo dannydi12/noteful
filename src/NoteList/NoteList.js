@@ -16,19 +16,19 @@ function NoteList(props) {
 
 NoteList.defaultProps = {
   notes: [{ id: '0',
-   name: 'empty', 
+   note_name: 'empty', 
    content:'Default Content', 
    modified:'defaultDate',
-   folderId:'defaultFolder Id' }]
+   folder_id: 1 }]
 }
 
 NoteList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.shape({ 
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    note_name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     modified: PropTypes.string.isRequired,
-    folderId: PropTypes.string.isRequired
+    folder_id: PropTypes.number.isRequired
   }))
 };
 

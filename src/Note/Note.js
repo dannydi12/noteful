@@ -11,7 +11,7 @@ function Note(props) {
         return (
           <>
             <Link to={`/note/${props.note.id}`}>
-              <h3>{props.note.name}</h3>
+              <h3>{props.note.note_name}</h3>
             </Link>
             <p>{props.note.modified}</p>
             <button onClick={() => {
@@ -27,11 +27,11 @@ function Note(props) {
 
 Note.propTypes = {
   note: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    note_name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     modified: PropTypes.string.isRequired,
-    folderId: PropTypes.string.isRequired
+    folder_id: PropTypes.number.isRequired
   })
 }
 

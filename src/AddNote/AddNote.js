@@ -84,7 +84,7 @@ class AddNote extends React.Component {
 
                 <label id='folderId' htmlFor='folderId'>Folder ID</label>
                 <select aria-labelledby='folderId' name='folderId'>
-                  {value.folders.map(folder => <option key={folder.id} value={folder.id}>{folder.name}</option>)}
+                  {value.folders.map(folder => <option key={folder.id} value={folder.id}>{folder.folder_name}</option>)}
                 </select>
 
                 <label id='content' htmlFor='content'>Content</label>

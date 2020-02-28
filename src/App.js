@@ -9,6 +9,7 @@ import AddFolder from './AddFolder/AddFolder';
 import MainError from './Error/MainError';
 import AddNote from './AddNote/AddNote';
 import moment from 'moment';
+import config from './config';
 
 
 class App extends React.Component {
@@ -24,7 +25,7 @@ class App extends React.Component {
   }
 
   getStore = (endpoint) => {
-    const url = `http://localhost:9090/${endpoint}`
+    const url = `${config.API_URL}/${endpoint}`
 
     fetch(url)
       .then(res => {
@@ -39,7 +40,7 @@ class App extends React.Component {
   }
 
   deleteNote = (id) => {
-    const url = `http://localhost:9090/notes/${id}`
+    const url = `${config.API_URL}/notes/${id}`
 
     fetch(url, { method: 'DELETE', headers: { 'content-type': 'application/json' } })
       .then(res => {
@@ -57,7 +58,7 @@ class App extends React.Component {
 
   addFolder = (event, callback) => {
     event.preventDefault();
-    const url = `http://localhost:9090/folders`
+    const url = `${config.API_URL}/folders`
 
     fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value }) })
       .then(res => {
@@ -76,9 +77,9 @@ class App extends React.Component {
 
   addNote = (event, callback) => {
     event.preventDefault();
-    const url = `http://localhost:9090/notes`
+    const url = `${config.API_URL}/notes`
 
-    fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value, folderId: event.target.folderId.value, modified: moment().format(), content: event.target.content.value }) })
+    fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name: event.target.name.value, folder: event.target.folderId.value, modified: moment().format(), content: event.target.content.value }) })
       .then(res => {
         if (!res.ok) {
           throw Error(res.ok)
@@ -120,8 +121,8 @@ class App extends React.Component {
             <MainError>
               <Switch>
                 <Route exact path='/' render={(routeProps) => <NoteList {...routeProps} notes={this.state.notes} />} />
-                <Route exact path='/folder/:id' render={(routeProps) => <NoteList {...routeProps} notes={this.state.notes.filter(note => note.folderId === routeProps.match.params.id)} />} />
-                <Route exact path='/note/:id' render={({ match }) => <Note note={this.state.notes.find(note => note.id === match.params.id)} />} />
+                <Route exact path='/folder/:id' render={(routeProps) => <NoteList {...routeProps} notes={this.state.notes.filter(note => note.folder_id === Number(routeProps.match.params.id))} />} />
+                <Route exact path='/note/:id' render={({ match }) => <Note note={this.state.notes.find(note => note.id === Number(match.params.id))} />} />
                 <Route exact path='/add-folder' component={AddFolder} />
                 <Route exact path='/add-note' component={AddNote} />
                 <Route render={() => <p>There are no notes to display.</p>} />

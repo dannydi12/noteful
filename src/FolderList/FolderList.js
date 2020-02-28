@@ -7,7 +7,7 @@ function FolderList(props) {
   const folders = props.folders.map(folder => (
     <li key={folder.id} className='folder'>
       <NavLink to={`/folder/${folder.id}`}>
-        <p>{folder.name}</p>
+        <p>{folder.folder_name}</p>
       </NavLink>
     </li>
   ));
@@ -22,13 +22,13 @@ function FolderList(props) {
 }
 
 FolderList.defaultProps = {
-  folders: [{ id: '0', name: 'empty' }]
+  folders: [{ id: 0, folder_name: 'empty' }]
 }
 
 FolderList.propTypes = {
   folders: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired,
+    folder_name: PropTypes.string.isRequired
   })).isRequired 
 };
 

@@ -14,9 +14,9 @@ function Sidebar(props) {
             <Route path='/note/:id' render={(routerProps) => (
               <>
                 <h2>{value.folders.find(folder => {
-                  const folderId = value.notes.find(note => note.id === routerProps.match.params.id).folderId;
+                  const folderId = value.notes.find(note => note.id === Number(routerProps.match.params.id)).folder_id;
                   return folderId === folder.id;
-                }).name
+                }).folder_name
                 }</h2> 
                 <button onClick={routerProps.history.goBack}>Go Back</button>
               </>)} />
